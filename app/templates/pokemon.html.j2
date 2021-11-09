@@ -1,0 +1,71 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+Pokemon Details
+{% endblock %}
+
+{% block content %}
+        <form action="/pokemon" method="POST">
+            {{ form.hidden_tag() }}
+            <h1>Add Pokemon</h1>
+            <p style="background-color:#BDD9FB; width:275px">Search for a Pokemon by name</p>
+            <div style="float:left">
+            {# name field #}
+            {{ form.name.label(class="form-label") }}
+            {# {{ form.name(class="form-control") }} #}
+            {{ form.name }}
+            </div>
+            <div style="float:left; margin:-1px 2px;">
+            {{ form.submit(type="image" ,src="..\static\images\search.png", width=33, height=33, value="search" ) }} 
+            </div>
+        </form>
+        <br>
+        {% if error %}
+            <small style="color:red;">{{error}}</small>
+        {% else %}
+            <small style="color:red;"></small>
+        {% endif %}
+        
+        {% if pokemon %}
+            <br>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        {# <th scope="col">Status</th> #}
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Order</th>
+                        <th scope="col">HP</th>
+                        <th scope="col">Defense</th>
+                        <th scope="col">Attack</th>
+                        <th scope="col">Sprite URL</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pokemon_val in pokemon %}
+                    <tr>
+                        <th scope="row">{{pokemon_val['id']}}</th>
+                        <th scope="row">{{pokemon_val['name']}}</th>
+                        <td>{{pokemon_val['order']}}</td>
+                        <td>{{pokemon_val['hp']}}</td>
+                        <td>{{pokemon_val['defense']}}</td>
+                        <td>{{pokemon_val['attack']}}</td>
+                        <td>{{pokemon_val['url']}}</td>
+                        <td><img src={{pokemon_val['url']}} alt="Loading.." border="3" height=100 width=100></img></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {# catch #}
+            <br>
+            {% if current_user.count_of_pokemon() == 5 %}
+                <p style="background-color:#F7BDAB; height:40px; font-weight:bold;font-size:14px; padding:7px"> You now have {{current_user.count_of_pokemon()}} pokemons.</p>
+                <p style="background-color:#FB754A; height:40px; font-weight:bold;font-size:14px; padding:7px"> You cannot catch more pokemons. Please check your Pokedex.</p>
+            {% elif current_user.count_of_pokemon() < 5 %}
+                <p style="background-color:#FAB373; height:40px; font-weight:bold;font-size:14px; padding:7px"> You caught this pokemon. Please check the newly caught pokemon on Pokedex page.</p>
+            {% endif %}
+    {% endif %}
+
+{% endblock %}

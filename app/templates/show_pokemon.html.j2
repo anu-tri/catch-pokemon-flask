@@ -1,0 +1,47 @@
+{% extends 'base.html.j2' %}
+{% block content %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/show_pokemon.css')}}">
+{% endblock %}
+
+
+{# <h5>{{poke.pokeauthor.first_name}} {{poke.pokeauthor.last_name}} added: </h5> #}
+<p style="background-color:coral; font-size:20px;font-weight:bold; width:740px; height:40px; padding:5px">{{current_user.first_name}}'s Pokedex</p>
+<p style="background-color:#E3F6FC; font-size:16px;font-weight:bold; width:740px; height:40px;padding:7px">Number of Pokemons: {{current_user.count_of_pokemon()}}</p>
+{% for poke in pokemon %}
+
+    {% if poke.user_id==current_user.id %}
+        <div class="card mb-3" id="poke_card" style="max-width: 740px;border:solid 1px gray;border-radius: 25px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+            <div class="card-body" >
+                <p class="card-text" style="background-color:#9DDEED"><b>{{poke.name.title()}}</b></p>
+                <p class="card-text">Order: {{poke.order}}</p>
+                <p class="card-text">Health Points: {{poke.hp}}</p>
+                {# <p class="card-text">Defense: {{poke.defense}}</p>
+                <p class="card-text">Attack: {{poke.attack}}</p> #} 
+            </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <img src="{{poke.url}}" class="img-fluid rounded-start" alt="avatar" style="height:200px;">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-1" style="padding-top:80px">
+                <small><a href="{{url_for('main.view_pokemon', id = poke.id)}}">View</a></small>&nbsp;
+             </div>
+             <div class="col-md-1" style="padding-top:80px">
+                <small><a href="{{url_for('main.remove_pokemon', id = poke.id)}}">Release</a></small>
+            </div>
+
+        </div>
+        <div class="row g-0">
+
+            
+        </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

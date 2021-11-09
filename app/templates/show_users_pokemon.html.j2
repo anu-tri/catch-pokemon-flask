@@ -1,0 +1,68 @@
+{% extends 'base.html.j2' %}
+
+{% block content %}
+
+{% for poke in pokemon %}
+    {# <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5> #}
+    {% if not poke.user_id == current_user.id %} 
+        <div class="card mb-3" style="max-width: 200px; float:left">
+        <div class="row g-0">
+            <div class="col-md-4">
+            <input type="checkbox" id="player_{{poke.user_id}}" name="player_{{poke.user_id}}" value="poke.id"> 
+            <img src='https://avatars.dicebear.com/api/bottts/{poke.user_id}.get_icon_url().svg' class="img-fluid rounded-start" alt="avatar">
+             {# <img src="{{ users.get_icon_url() }}" class="img-fluid rounded-start" alt="avatar">  #}
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-md-8">
+            <div class="card-body">
+                {# <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5> #}
+                <p class="card-text"><b>Player ID: {{poke.user_id}}</b></p>
+                <p class="card-text" >{{poke.name}}<img src="{{poke.url}}" class="img-fluid rounded-start" alt="avatar" width=100 height=100 border=3></p>
+                <p class="card-text" style="font-size:22">HP: {{poke.hp}} Defense: {{poke.defense}} Attack: {{poke.attack}}</p>
+                <p class="card-text"><span style="background-color:#FBF0B7">Won:2 </span>&nbsp; <span style="background-color:#FC541A">Lost:1</p>
+            </div>
+            </div>
+        </div>
+        </div>
+        
+    {# {% endif %} #}
+    {% else %}
+        {# <h5 class="card-title">{{current_user.first_name}} {{current_user.last_name}}</h5> #} 
+        <div class="card mb-3" style="max-width: 200px;float:left">
+        <div class="row g-0">
+            <div class="col-md-4">
+            <input type="checkbox" id="player_{{poke.user_id}}" name="player_{{poke.user_id}}" value="poke.id"> 
+            <img src="{{ current_user.get_icon_url() }}" class="img-fluid rounded-start" alt="avatar"> 
+            {# <img src="{{ user.get_icon_url() }}" class="img-fluid rounded-start" alt="avatar"> #}
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-md-8">
+            <div class="card-body">
+                {# <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5> #}
+                <p class="card-text"><b>Player ID: {{poke.user_id}}</b></p>
+                <p class="card-text">{{poke.name}}<img src="{{poke.url}}" class="img-fluid rounded-start" alt="avatar" width=100 height=100 border=3></p>
+                <p class="card-text" style="font-size:22">HP: {{poke.hp}} Defense: {{poke.defense}} Attack: {{poke.attack}}</p>
+                <p class="card-text"><span style="background-color:#FBF0B7">Won:2 </span>&nbsp; <span style="background-color:#FC541A">Lost:1</p>
+            </div>
+            </div>
+        </div>
+        {# </div> #}
+        </div>
+    {% endif %}
+
+{% endfor %}
+
+&nbsp;
+<label id="player1" name="player1" style="background-color:aliceblue">Player1:</label>
+<br>
+&nbsp;
+<button class="btn btn-danger btn-lg" type="submit">ATTACKS</button>
+<br><br>
+&nbsp;
+<label id="player2" name="player2" style="background-color:aliceblue">Player2:</label>
+
+
+
+{% endblock %}

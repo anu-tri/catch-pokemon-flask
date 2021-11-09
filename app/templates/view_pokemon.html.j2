@@ -1,0 +1,34 @@
+{% extends 'base.html.j2' %}
+{% block content %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/show_pokemon.css')}}">
+{% endblock %}
+
+
+{# {% for poke in pokemon %} #}
+
+    {% if poke.user_id==current_user.id %}
+        <div class="card mb-3" id="poke_card" style="max-width: 740px;border-style:none">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{poke.url}}" class="img-fluid rounded-start" alt="avatar" height=200px width=200px border=3 >
+            </div>
+
+            <div class="col-md-4">
+            <div class="card-body">
+                <p class="card-text" style="background-color:#9DDEED;font-size:25px"><b>{{poke.name.title()}}</b></p>
+                <p class="card-text" style="background-color:#F8FAB1">Order: {{poke.order}}</p>
+                <p class="card-text" style="background-color:#F9DEBF">Health Points: {{poke.hp}}</p>
+                <p class="card-text" style="background-color:#ECF9BF">Defense: {{poke.defense}}</p>
+                <p class="card-text" style="background-color:#FCB49C">Attack: {{poke.attack}}</p>
+                <p><a href="{{url_for('main.show_pokemon')}}">Back to Pokedex</a></p>
+            </div>
+            </div>
+
+        </div>
+        </div>
+    {% endif %}
+{# {% endfor %} #}
+
+{% endblock %}

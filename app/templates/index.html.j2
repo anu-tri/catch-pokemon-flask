@@ -1,0 +1,40 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+  Pokemon
+{% endblock %}
+
+{# {% block content %}
+  <h1>Welcome to Pokemon page</h1>
+  <p>Search for a pokemon using the Pokemon menu</p>
+{% endblock %} #}
+
+{% block content %}
+<form action="/index" method="GET">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 style="color:#1A77E4">Pokemon</h5>
+      <p>Pokemon is a role-playing game based around building a small team of monsters to battle other monsters in a quest to become the best.</p>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <h5 style="color:#1A77E4">Pokemon Battle</h5>
+      <p>A Pokemon Battle occurs when two players battle each other with Pokemon. Each player can bring up to five pokemon into a battle.</p>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <h5 style="color:#1A77E4">Game Rules</h5>
+      <p><b>HP</b> stands for Health Points and represents the maximum amount of damage a Pokemon can take in the battle before fainting. </p>
+      <p><b>Attack</b> stat determines how powerful a Pokemon's physical moves will be.</p>
+      <p><b>Defense</b> determines how much damage a Pokemon will resist when hit by a physical move.</p>
+      <br>
+      <p><u>Rule:</u></p>
+      <p>A player whose sum of hp, attack and defense points are greater than the other player wins the battle.</p>
+    </div>
+  </div>
+</form>
+{% endblock %}
